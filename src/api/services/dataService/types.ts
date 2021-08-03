@@ -1,7 +1,10 @@
-import { query } from '../..';
+export type PostDataQueryParamsType = {
+    dwh_link: string;
+};
 
-// export const DataAPI = {
-//     postData: async (params: InsertInstructionQueryParamsType) => {
-//         return query(responseCallback);
-//     },
-// };
+export type PostDataQueryResponseType = {
+    [variableName: string]: {
+        structure: 'scalar' | 'array';
+        type: string;
+    };
+};
