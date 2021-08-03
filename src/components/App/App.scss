@@ -1,0 +1,29 @@
+.app {
+    display: grid;
+
+    grid-template-rows: 55px 1fr;
+    grid-template-columns: 1fr;
+
+    height: 100%;
+
+    &__header {
+        background-color: #0073f7;
+
+        text-align: center;
+        color: #fff;
+    }
+
+    &__content {
+        padding: 15px 30px;
+
+        overflow-y: auto;
+
+        background-color: #e5e5e5;
+
+        &__wrapper {
+            background-color: #fff;
+            box-shadow: 1px 4px 48px rgba(0, 36, 77, 0.25);
+            border-radius: 8px;
+        }
+    }
+}
