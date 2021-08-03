@@ -1,10 +1,9 @@
 import React, { useCallback } from 'react';
 
-import Timezones from 'timezones-list';
-
 import type { MainFormReduxState } from '../MainFormTypes';
 
 import DataFieldset from './Fieldsets/DataFieldset';
+import TriggerFieldset from './Fieldsets/TriggerFieldset';
 
 import './MainForm.scss';
 
@@ -26,31 +25,7 @@ const MainForm: React.FC<PropsType> = props => {
 
             <hr className="mainForm__separator" />
 
-            <fieldset className="mainForm__fieldset">
-                <div className="mainForm__fieldset__legend">Trigger</div>
-                <div className="mainForm__fieldset__inputs mainForm__fieldset__inputs--two">
-                    <div className="mainForm__formItem">
-                        <label className="mainForm__formItem__label" htmlFor="cron_exp">
-                            CRON expression
-                        </label>
-                        <input className="mainForm__formItem__input" id="cron_exp" type="text" placeholder="* * * * *" />
-                    </div>
-                    <div className="mainForm__formItem">
-                        <label className="mainForm__formItem__label" htmlFor="timezone">
-                            Time zone
-                        </label>
-                        <select className="mainForm__formItem__input" id="timezone" defaultValue="none">
-                            <option disabled hidden value="none" />
-                            {Timezones.map(timeZone => (
-                                <option key={timeZone.tzCode} value={timeZone.utc}>
-                                    {timeZone.label}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
-                </div>
-                <div className="mainForm__fieldset__extra" />
-            </fieldset>
+            <TriggerFieldset />
 
             <hr className="mainForm__separator" />
 
