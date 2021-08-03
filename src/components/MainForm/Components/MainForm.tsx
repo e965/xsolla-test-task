@@ -1,9 +1,10 @@
 import React, { useCallback } from 'react';
-import { useDebounceCallback } from '@react-hook/debounce';
 
 import Timezones from 'timezones-list';
 
 import type { MainFormReduxState } from '../MainFormTypes';
+
+import DataFieldset from './Fieldsets/DataFieldset';
 
 import './MainForm.scss';
 
@@ -19,36 +20,9 @@ const MainForm: React.FC<PropsType> = props => {
         event.preventDefault();
     }, []);
 
-    const handleDataPostCallback = useDebounceCallback((event: React.FormEvent<HTMLInputElement>) => {
-        const _target = event.target as HTMLInputElement;
-        if (_target.value && _target.checkValidity()) {
-            console.log(_target.value);
-            handleDataPost(_target.value);
-        } else {
-            _target.reportValidity();
-        }
-    }, 250);
-
     return (
         <form className="mainForm" onSubmit={formSubmitHandler}>
-            <fieldset className="mainForm__fieldset">
-                <div className="mainForm__fieldset__legend">Data</div>
-                <div className="mainForm__fieldset__inputs">
-                    <div className="mainForm__formItem">
-                        <label className="mainForm__formItem__label" htmlFor="dwh_link">
-                            DWH Link
-                        </label>
-                        <input
-                            className="mainForm__formItem__input"
-                            id="dwh_link"
-                            type="url"
-                            onInput={handleDataPostCallback}
-                            placeholder="https://service.xsolla.com"
-                        />
-                    </div>
-                </div>
-                <div className="mainForm__fieldset__extra" />
-            </fieldset>
+            <DataFieldset {...{ handleDataPost }} />
 
             <hr className="mainForm__separator" />
 
