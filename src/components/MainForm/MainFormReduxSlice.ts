@@ -9,7 +9,7 @@ const SliceName = 'MainForm';
 export const postDataThunk = createAsyncThunk(`${SliceName}/postData`, async (params: Parameters<typeof DataAPI['postData']>[0]) => {
     const response = await DataAPI.postData(params);
 
-    console.groupCollapsed('Запрос /post');
+    console.groupCollapsed('Запрос /data');
     console.log('params:', JSON.stringify(params));
     console.log('resoinse:', JSON.stringify(response));
     console.groupEnd();

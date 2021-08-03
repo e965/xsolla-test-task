@@ -55,6 +55,10 @@
     &__formItem {
         padding: 0 5px 0;
 
+        &:not(:first-child):not(&__noTopMargin) {
+            margin-top: 20px;
+        }
+
         &__label,
         &__input {
             display: block;
@@ -72,6 +76,11 @@
             padding: 5px 10px;
 
             border: 1px solid #c5d0db;
+
+            &--textarea {
+                height: 200px;
+                resize: none;
+            }
         }
     }
 

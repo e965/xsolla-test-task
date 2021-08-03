@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import type { MainFormReduxState } from '../../../MainFormTypes';
+
+import LetterFormItems from './FormItems/LetterFormItems';
 
 type PropsType = Pick<MainFormReduxState, 'Variables'> & {
     //
@@ -8,6 +10,8 @@ type PropsType = Pick<MainFormReduxState, 'Variables'> & {
 
 const DataFieldset: React.FC<PropsType> = props => {
     const { Variables } = props;
+
+    const [SelectedType, setSelectedType] = useState<'letter' | 'chat_message' | 'ticket' | 'none'>('none');
 
     return (
         <fieldset className="mainForm__fieldset">
@@ -17,13 +21,19 @@ const DataFieldset: React.FC<PropsType> = props => {
                     <label className="mainForm__formItem__label" htmlFor="timezone">
                         Type
                     </label>
-                    <select className="mainForm__formItem__input" id="timezone" defaultValue="none">
+                    <select
+                        className="mainForm__formItem__input"
+                        id="timezone"
+                        value={SelectedType}
+                        onChange={event => setSelectedType(event.currentTarget.value as typeof SelectedType)}>
                         <option disabled hidden value="none" />
                         <option value="letter">Letter</option>
                         <option value="chat_message">Chart Message</option>
                         <option value="ticket">Ticket</option>
                     </select>
                 </div>
+
+                {SelectedType === 'letter' ? <LetterFormItems /> : null}
             </div>
             <section className="mainForm__fieldset__extra mainForm__variables">
                 {Variables ? (

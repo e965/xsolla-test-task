@@ -10,13 +10,13 @@ const TriggerFieldset: React.FC<PropsType> = props => {
         <fieldset className="mainForm__fieldset">
             <div className="mainForm__fieldset__legend">Trigger</div>
             <div className="mainForm__fieldset__inputs mainForm__fieldset__inputs--two">
-                <div className="mainForm__formItem">
+                <div className="mainForm__formItem mainForm__formItem__noTopMargin">
                     <label className="mainForm__formItem__label" htmlFor="cron_exp">
                         CRON expression
                     </label>
                     <input className="mainForm__formItem__input" id="cron_exp" type="text" placeholder="* * * * *" />
                 </div>
-                <div className="mainForm__formItem">
+                <div className="mainForm__formItem mainForm__formItem__noTopMargin">
                     <label className="mainForm__formItem__label" htmlFor="timezone">
                         Time zone
                     </label>
