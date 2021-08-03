@@ -4,7 +4,7 @@
     "scripts": {
         "start": "vite",
         "build": "tsc && vite build",
-        "serve": "vite preview",
+        "serve": "vite preview --host",
         "prettier": "prettier --write **/*.{json,yml,yaml,md,js,ts,tsx}",
         "lint-staged": "lint-staged",
         "prepare": "is-ci || husky install"
