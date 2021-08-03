@@ -1,8 +1,8 @@
 .mainForm {
-    padding: 20px;
-
     width: 100%;
     min-width: 900px;
+
+    padding: 25px 0;
 
     &__fieldset {
         display: grid;
@@ -14,6 +14,7 @@
         max-width: 900px;
 
         margin: 0 auto;
+        padding: 0 25px;
 
         border: 0;
 
@@ -36,6 +37,8 @@
 
             grid-template-rows: 1fr;
             grid-template-columns: 1fr;
+
+            padding: 0 25px;
 
             &--two {
                 grid-template-columns: 0.5fr 0.5fr;
@@ -66,9 +69,50 @@
             height: 45px;
 
             margin-top: 5px;
-            padding: 5px;
+            padding: 5px 10px;
 
             border: 1px solid #c5d0db;
+        }
+    }
+
+    &__variables {
+        &__title {
+            color: #747e8a;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        &__list {
+            margin-top: 10px;
+        }
+
+        &__listItem {
+            list-style: none;
+
+            &:not(:first-child) {
+                margin-top: 15px;
+            }
+        }
+
+        &__button {
+            display: block;
+            width: 100%;
+
+            padding: 10px 5px;
+
+            background-color: #fff;
+            border: 1px solid #c5d0db;
+            border-radius: 6px;
+
+            box-shadow: 1px 4px 8px rgba(2, 36, 77, 0.25);
+
+            color: #0073f7;
+
+            cursor: pointer;
+
+            &:hover {
+                background-color: #fbfbfb;
+            }
         }
     }
 }
