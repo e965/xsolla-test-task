@@ -1,15 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
+import ContentEditable from 'react-contenteditable';
 
-const LetterFormItems: React.FC = () => {
-    // const [text, setText] = useState('');
+import type { MainFormReduxState } from '../../../../MainFormTypes';
 
-    // const handleTextChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    //     console.log(event.target.value);
+import usehighlightVariables from '../../../../logic/highlight-variables';
 
-    //     const ddd = event.target.value.replaceAll('asd', '<s>123</s>');
+type PropsType = Pick<MainFormReduxState, 'Variables'> & {
+    //
+};
 
-    //     setText(ddd);
-    // };
+const LetterFormItems: React.FC<PropsType> = props => {
+    const { Variables } = props;
+
+    const [text, setText] = usehighlightVariables(Object.keys(Variables ?? {}));
 
     return (
         <>
@@ -35,11 +38,12 @@ const LetterFormItems: React.FC = () => {
                 <label className="mainForm__formItem__label" htmlFor="letter_text">
                     Text
                 </label>
-                <textarea
+                <ContentEditable
                     className="mainForm__formItem__input mainForm__formItem__input--textarea"
-                    id="letter_text"
-                    // value={text}
-                    // onChange={handleTextChange}
+                    html={text}
+                    role="textbox"
+                    aria-labelledby="letter_text"
+                    onChange={event => setText(event.target.value)}
                 />
             </div>
         </>

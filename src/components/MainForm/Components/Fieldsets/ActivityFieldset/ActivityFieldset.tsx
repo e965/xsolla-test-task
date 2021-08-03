@@ -33,7 +33,7 @@ const DataFieldset: React.FC<PropsType> = props => {
                     </select>
                 </div>
 
-                {SelectedType === 'letter' ? <LetterFormItems /> : null}
+                {SelectedType === 'letter' ? <LetterFormItems {...{ Variables }} /> : null}
             </div>
             <section className="mainForm__fieldset__extra mainForm__variables">
                 {Variables ? (

@@ -80,6 +80,11 @@
             &--textarea {
                 height: 200px;
                 resize: none;
+
+                mark {
+                    background-color: transparent;
+                    color: #0073f7;
+                }
             }
         }
     }
