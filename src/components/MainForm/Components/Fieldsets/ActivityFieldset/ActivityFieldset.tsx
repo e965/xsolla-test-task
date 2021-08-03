@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import type { MainFormReduxState } from '../../../MainFormTypes';
 
 import LetterFormItems from './FormItems/LetterFormItems';
+import ChatMessageFormItems from './FormItems/ChatMessageFormItems';
 
 type PropsType = Pick<MainFormReduxState, 'Variables'> & {
     //
@@ -28,12 +29,13 @@ const DataFieldset: React.FC<PropsType> = props => {
                         onChange={event => setSelectedType(event.currentTarget.value as typeof SelectedType)}>
                         <option disabled hidden value="none" />
                         <option value="letter">Letter</option>
-                        <option value="chat_message">Chart Message</option>
+                        <option value="chat_message">Chat Message</option>
                         <option value="ticket">Ticket</option>
                     </select>
                 </div>
 
                 {SelectedType === 'letter' ? <LetterFormItems {...{ Variables }} /> : null}
+                {SelectedType === 'chat_message' ? <ChatMessageFormItems {...{ Variables }} /> : null}
             </div>
             <section className="mainForm__fieldset__extra mainForm__variables">
                 {Variables ? (

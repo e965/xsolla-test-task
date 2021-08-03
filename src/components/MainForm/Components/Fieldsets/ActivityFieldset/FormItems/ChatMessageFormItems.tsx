@@ -9,7 +9,7 @@ type PropsType = Pick<MainFormReduxState, 'Variables'> & {
     //
 };
 
-const LetterFormItems: React.FC<PropsType> = props => {
+const ChatMessageFormItems: React.FC<PropsType> = props => {
     const { Variables } = props;
 
     const [Text, setText] = usehighlightVariables(Object.keys(Variables ?? {}));
@@ -18,21 +18,9 @@ const LetterFormItems: React.FC<PropsType> = props => {
         <>
             <div className="mainForm__formItem">
                 <label className="mainForm__formItem__label" htmlFor="letter_from">
-                    From
+                    Webhook URL
                 </label>
-                <input className="mainForm__formItem__input" id="letter_from" type="text" />
-            </div>
-            <div className="mainForm__formItem">
-                <label className="mainForm__formItem__label" htmlFor="letter_to">
-                    To
-                </label>
-                <input className="mainForm__formItem__input" id="letter_to" type="text" />
-            </div>
-            <div className="mainForm__formItem">
-                <label className="mainForm__formItem__label" htmlFor="letter_subject">
-                    Subject
-                </label>
-                <input className="mainForm__formItem__input" id="letter_subject" type="text" />
+                <input className="mainForm__formItem__input" id="letter_from" type="url" />
             </div>
             <div className="mainForm__formItem">
                 <label className="mainForm__formItem__label" htmlFor="letter_text">
@@ -50,4 +38,4 @@ const LetterFormItems: React.FC<PropsType> = props => {
     );
 };
 
-export default LetterFormItems;
+export default ChatMessageFormItems;
