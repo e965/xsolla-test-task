@@ -30,7 +30,8 @@ const DataFieldset: React.FC<PropsType> = props => {
                         id="activity_type"
                         name="activity_type"
                         value={SelectedActivityType}
-                        onChange={event => selectedActivityTypeChange(event.currentTarget.value as ActivityType)}>
+                        onChange={event => selectedActivityTypeChange(event.currentTarget.value as ActivityType)}
+                        required>
                         <option disabled hidden value="none" />
                         <option value="letter">Letter</option>
                         <option value="chat_message">Chat Message</option>

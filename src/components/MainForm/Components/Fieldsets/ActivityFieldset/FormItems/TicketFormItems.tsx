@@ -17,7 +17,7 @@ const TicketFormItems: React.FC<PropsType> = props => {
                 </label>
                 <TextInputWithHightlight
                     inputClassName="mainForm__formItem__input"
-                    inputProps={{ id: 'ticket_summary', name: 'ticket_summary' }}
+                    inputProps={{ id: 'ticket_summary', name: 'ticket_summary', required: true }}
                     hightlightArray={VariablesKeys}
                 />
             </div>
@@ -27,7 +27,7 @@ const TicketFormItems: React.FC<PropsType> = props => {
                 </label>
                 <TextInputWithHightlight
                     inputClassName="mainForm__formItem__input"
-                    inputProps={{ id: 'ticket_description', name: 'ticket_description' }}
+                    inputProps={{ id: 'ticket_description', name: 'ticket_description', required: true }}
                     hightlightArray={VariablesKeys}
                 />
             </div>
@@ -37,7 +37,7 @@ const TicketFormItems: React.FC<PropsType> = props => {
                 </label>
                 <TextInputWithHightlight
                     inputClassName="mainForm__formItem__input"
-                    inputProps={{ id: 'ticket_assignee', name: 'ticket_assignee' }}
+                    inputProps={{ id: 'ticket_assignee', name: 'ticket_assignee', required: true }}
                     hightlightArray={VariablesKeys}
                 />
             </div>
@@ -47,7 +47,7 @@ const TicketFormItems: React.FC<PropsType> = props => {
                 </label>
                 <TextInputWithHightlight
                     inputClassName="mainForm__formItem__input"
-                    inputProps={{ id: 'ticket_reporter', name: 'ticket_reporter' }}
+                    inputProps={{ id: 'ticket_reporter', name: 'ticket_reporter', required: true }}
                     hightlightArray={VariablesKeys}
                 />
             </div>

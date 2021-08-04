@@ -29,6 +29,10 @@ const MainForm: React.FC<PropsType> = props => {
             const _FormData = new FormData(event.target as HTMLFormElement);
             const FormEntries = Object.fromEntries(_FormData) as unknown as MainFormEntriesType;
 
+            if (FormEntries.activity_type === 'none') {
+                return alert('No activity type selected');
+            }
+
             handleFormEntriesSubmit(FormEntries);
         },
         [handleFormEntriesSubmit]

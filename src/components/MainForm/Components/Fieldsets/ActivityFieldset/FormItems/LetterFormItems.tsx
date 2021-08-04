@@ -18,7 +18,7 @@ const LetterFormItems: React.FC<PropsType> = props => {
                 </label>
                 <TextInputWithHightlight
                     inputClassName="mainForm__formItem__input"
-                    inputProps={{ id: 'letter_from', name: 'letter_from' }}
+                    inputProps={{ id: 'letter_from', name: 'letter_from', required: true }}
                     hightlightArray={VariablesKeys}
                 />
             </div>
@@ -28,7 +28,7 @@ const LetterFormItems: React.FC<PropsType> = props => {
                 </label>
                 <TextInputWithHightlight
                     inputClassName="mainForm__formItem__input"
-                    inputProps={{ id: 'letter_to', name: 'letter_to' }}
+                    inputProps={{ id: 'letter_to', name: 'letter_to', required: true }}
                     hightlightArray={VariablesKeys}
                 />
             </div>
@@ -38,7 +38,7 @@ const LetterFormItems: React.FC<PropsType> = props => {
                 </label>
                 <TextInputWithHightlight
                     inputClassName="mainForm__formItem__input"
-                    inputProps={{ id: 'letter_subject', name: 'letter_subject' }}
+                    inputProps={{ id: 'letter_subject', name: 'letter_subject', required: true }}
                     hightlightArray={VariablesKeys}
                 />
             </div>
@@ -48,7 +48,7 @@ const LetterFormItems: React.FC<PropsType> = props => {
                 </label>
                 <TextareaWithHightlight
                     textareaClassName="mainForm__formItem__input mainForm__formItem__input--textarea"
-                    textareaProps={{ id: 'letter_text', name: 'letter_text' }}
+                    textareaProps={{ id: 'letter_text', name: 'letter_text', required: true }}
                     hightlightArray={VariablesKeys}
                 />
             </div>

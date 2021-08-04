@@ -24,17 +24,17 @@ const MainFormContainer: React.FC = () => {
 
             switch (CreationPayload.type) {
                 case 'letter':
-                    activityName = 'Письмо';
+                    activityName = 'Letter';
                     break;
                 case 'chat_message':
-                    activityName = 'Сообщение в чат';
+                    activityName = 'Chat Message';
                     break;
                 case 'ticket':
-                    activityName = 'Тикет в техподдержку';
+                    activityName = 'Ticket';
                     break;
             }
 
-            alert(`Активность "${activityName}" успешно создана (ID: ${CreationPayload.id})`);
+            alert(`Activity "${activityName}" has been successfully created (ID: ${CreationPayload.id})`);
         }
     }, [CreationPayload]);
 

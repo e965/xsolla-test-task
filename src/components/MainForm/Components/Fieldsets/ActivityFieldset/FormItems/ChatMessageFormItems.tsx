@@ -18,7 +18,7 @@ const ChatMessageFormItems: React.FC<PropsType> = props => {
                 </label>
                 <TextInputWithHightlight
                     inputClassName="mainForm__formItem__input"
-                    inputProps={{ id: 'chat_webhook_url', name: 'chat_webhook_url' }}
+                    inputProps={{ id: 'chat_webhook_url', name: 'chat_webhook_url', required: true }}
                     hightlightArray={VariablesKeys}
                 />
             </div>
@@ -28,7 +28,7 @@ const ChatMessageFormItems: React.FC<PropsType> = props => {
                 </label>
                 <TextareaWithHightlight
                     textareaClassName="mainForm__formItem__input mainForm__formItem__input--textarea"
-                    textareaProps={{ id: 'chat_text', name: 'chat_text' }}
+                    textareaProps={{ id: 'chat_text', name: 'chat_text', required: true }}
                     hightlightArray={VariablesKeys}
                 />
             </div>

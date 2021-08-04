@@ -32,6 +32,7 @@ const DataFieldset: React.FC<PropsType> = props => {
                         type="url"
                         onInput={handleDataPostCallback}
                         placeholder="https://service.xsolla.com"
+                        required
                     />
                 </div>
             </div>
