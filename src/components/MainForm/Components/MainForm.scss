@@ -194,7 +194,7 @@
         }
 
         &__list {
-            margin-top: 10px;
+            margin-top: 15px;
         }
 
         &__listItem {
@@ -228,6 +228,49 @@
             &:hover {
                 background-color: #fbfbfb;
             }
+        }
+    }
+
+    @media (max-width: 768px) {
+        min-width: auto;
+
+        &__fieldset {
+            grid-template-rows: auto auto auto;
+            grid-template-columns: 1fr;
+
+            &__legend {
+                text-align: center;
+            }
+
+            &__inputs {
+                padding: 0;
+                margin-top: 15px;
+
+                &--two {
+                    grid-template-rows: auto auto;
+                    grid-template-columns: 1fr;
+
+                    & > * {
+                        &:last-child {
+                            margin-top: 15px;
+                        }
+                    }
+                }
+            }
+        }
+
+        &__variables {
+            margin-top: 15px;
+
+            &__title {
+                text-align: center;
+            }
+        }
+
+        &__buttons {
+            flex-direction: column;
+
+            gap: 10px;
         }
     }
 }
