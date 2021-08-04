@@ -221,6 +221,10 @@
 
             cursor: pointer;
 
+            &[disabled] {
+                background-color: #fbfbfb;
+            }
+
             &:hover {
                 background-color: #fbfbfb;
             }

@@ -3,6 +3,8 @@ import React, { useState, useCallback } from 'react';
 import type { MainFormReduxState } from '../MainFormTypes';
 import type { ActivityType, MainFormEntriesType } from '../MainFormTypes';
 
+import { FieldInFocusProvider } from './FieldInFocusContext/FieldInFocusContext';
+
 import DataFieldset from './Fieldsets/DataFieldset';
 import TriggerFieldset from './Fieldsets/TriggerFieldset';
 import ActivityFieldset from './Fieldsets/ActivityFieldset/ActivityFieldset';
@@ -20,6 +22,8 @@ const MainForm: React.FC<PropsType> = props => {
     const { handleDataPost } = props;
     const { handleFormEntriesSubmit } = props;
 
+    const [IsTriggerUnlocked, setIsTriggerUnlocked] = useState<boolean>(false);
+    const [IsActivityUnlocked, setIsActivityUnlocked] = useState<boolean>(false);
     const [SelectedActivityType, setSelectedActivityType] = useState<ActivityType>('none');
 
     const formSubmitHandler = useCallback(
@@ -42,19 +46,33 @@ const MainForm: React.FC<PropsType> = props => {
         setSelectedActivityType(activityType);
     }, []);
 
+    const handleDataFieldsSetted = useCallback(() => {
+        setIsTriggerUnlocked(true);
+    }, []);
+
+    const handleTriggerFieldsSetted = useCallback(() => {
+        setIsActivityUnlocked(true);
+    }, []);
+
     return (
         <form className="mainForm" onSubmit={formSubmitHandler}>
-            <DataFieldset {...{ handleDataPost }} />
+            <DataFieldset {...{ handleDataPost }} {...{ handleDataFieldsSetted }} />
 
             <hr className="mainForm__separator" />
 
-            <TriggerFieldset />
+            <TriggerFieldset {...{ IsTriggerUnlocked }} {...{ handleTriggerFieldsSetted }} />
 
             <hr className="mainForm__separator" />
 
-            <ActivityFieldset {...{ Variables, VariablesKeys }} {...{ SelectedActivityType, selectedActivityTypeChange }} />
+            <FieldInFocusProvider>
+                <ActivityFieldset
+                    {...{ Variables, VariablesKeys }}
+                    {...{ IsActivityUnlocked }}
+                    {...{ SelectedActivityType, selectedActivityTypeChange }}
+                />
+            </FieldInFocusProvider>
 
-            {SelectedActivityType !== 'none' ? (
+            {SelectedActivityType !== 'none' && IsActivityUnlocked ? (
                 <div className="mainForm__buttons">
                     <div>
                         <button type="submit">Create</button>

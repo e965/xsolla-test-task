@@ -3,15 +3,18 @@ import { useDebounceCallback } from '@react-hook/debounce';
 
 type PropsType = {
     handleDataPost: (dwhLink: string) => void;
+    handleDataFieldsSetted: () => void;
 };
 
 const DataFieldset: React.FC<PropsType> = props => {
     const { handleDataPost } = props;
+    const { handleDataFieldsSetted } = props;
 
     const handleDataPostCallback = useDebounceCallback((event: React.FormEvent<HTMLInputElement>) => {
         const _target = event.target as HTMLInputElement;
         if (_target.value && _target.checkValidity()) {
             handleDataPost(_target.value);
+            handleDataFieldsSetted();
         } else {
             _target.reportValidity();
         }
