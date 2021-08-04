@@ -14,6 +14,12 @@ const App: React.FC = () => {
                 <div className="app__content__wrapper">
                     <MainForm />
                 </div>
+                <div className="app__content__link">
+                    github:{' '}
+                    <a href="https://github.com/e965/xsolla-test-task" target="_blank">
+                        e965/xsolla-test-task
+                    </a>
+                </div>
             </main>
         </div>
     );
