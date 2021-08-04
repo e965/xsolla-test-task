@@ -4,17 +4,21 @@
 
     padding: 25px 0;
 
+    &__fieldset,
+    &__buttons {
+        width: 100%;
+
+        margin: 0 auto;
+        padding: 0 30px;
+    }
+
     &__fieldset {
         display: grid;
 
         grid-template-rows: 1fr;
         grid-template-columns: 150px minmax(600px, 1fr) 150px;
 
-        width: 100%;
         max-width: 900px;
-
-        margin: 0 auto;
-        padding: 0 25px;
 
         border: 0;
 
@@ -43,6 +47,48 @@
             &--two {
                 grid-template-columns: 0.5fr 0.5fr;
                 gap: 10px;
+            }
+        }
+    }
+
+    &__buttons {
+        display: flex;
+
+        align-items: center;
+        justify-content: space-between;
+
+        margin-top: 25px;
+
+        max-width: 600px;
+
+        button {
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            width: 160px;
+            height: 45px;
+
+            background-color: #fff;
+
+            border-radius: 50px;
+            border: 1px solid #c5d0db;
+
+            text-transform: uppercase;
+
+            cursor: pointer;
+
+            &:hover {
+                opacity: 0.8;
+            }
+
+            &[type='submit'] {
+                background-color: #0073f7;
+
+                border: 0;
+
+                color: #fff;
             }
         }
     }
@@ -92,15 +138,16 @@
 
         position: relative;
 
+        margin-top: 5px;
+
         &--textarea {
             height: 200px;
         }
 
         &--textInput {
-            overflow: hidden;
-
             #{$iwh}__highlights {
-                padding: 12.5px 10px;
+                overflow: hidden;
+                padding: 15px 10px;
             }
         }
 
@@ -110,15 +157,15 @@
             height: 100%;
 
             position: absolute;
+
+            letter-spacing: 0.5px;
+            line-height: 1.25;
         }
 
         &__highlights {
             padding: 5px 10px;
 
             overflow: auto;
-
-            letter-spacing: 1;
-            line-height: 1.25;
 
             &__textBox {
                 white-space: pre-wrap;
@@ -136,9 +183,6 @@
         &__input {
             margin-top: 0;
             background-color: transparent;
-
-            letter-spacing: 1;
-            line-height: 1.25;
         }
     }
 

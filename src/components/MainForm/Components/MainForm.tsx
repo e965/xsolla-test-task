@@ -31,6 +31,15 @@ const MainForm: React.FC<PropsType> = props => {
             <hr className="mainForm__separator" />
 
             <ActivityFieldset {...{ Variables }} />
+
+            <div className="mainForm__buttons">
+                <div>
+                    <button type="submit">Save</button>
+                </div>
+                <div>
+                    <button>Cancel</button>
+                </div>
+            </div>
         </form>
     );
 };
