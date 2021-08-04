@@ -14,13 +14,13 @@ const TriggerFieldset: React.FC<PropsType> = props => {
                     <label className="mainForm__formItem__label" htmlFor="cron_exp">
                         CRON expression
                     </label>
-                    <input className="mainForm__formItem__input" id="cron_exp" type="text" placeholder="* * * * *" />
+                    <input className="mainForm__formItem__input" id="cron_exp" name="cron_exp" type="text" placeholder="* * * * *" />
                 </div>
                 <div className="mainForm__formItem mainForm__formItem__noTopMargin">
                     <label className="mainForm__formItem__label" htmlFor="timezone">
                         Time zone
                     </label>
-                    <select className="mainForm__formItem__input" id="timezone" defaultValue="none">
+                    <select className="mainForm__formItem__input" id="timezone" name="timezone" defaultValue="none">
                         <option disabled hidden value="none" />
                         {Timezones.map(timeZone => (
                             <option key={timeZone.tzCode} value={timeZone.utc}>

@@ -11,7 +11,6 @@ const DataFieldset: React.FC<PropsType> = props => {
     const handleDataPostCallback = useDebounceCallback((event: React.FormEvent<HTMLInputElement>) => {
         const _target = event.target as HTMLInputElement;
         if (_target.value && _target.checkValidity()) {
-            console.log(_target.value);
             handleDataPost(_target.value);
         } else {
             _target.reportValidity();
@@ -29,6 +28,7 @@ const DataFieldset: React.FC<PropsType> = props => {
                     <input
                         className="mainForm__formItem__input"
                         id="dwh_link"
+                        name="dwh_link"
                         type="url"
                         onInput={handleDataPostCallback}
                         placeholder="https://service.xsolla.com"

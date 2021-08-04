@@ -1,9 +1,9 @@
-import React from 'react';
-import ContentEditable from 'react-contenteditable';
+import React, { useMemo } from 'react';
 
 import type { MainFormReduxState } from '../../../../MainFormTypes';
 
-import usehighlightVariables from '../../../../logic/highlight-variables';
+import TextInputWithHightlight from '../../../Inputs/TextInputWithHightlight';
+import TextareaWithHightlight from '../../../Inputs/TextareaWithHightlight';
 
 type PropsType = Pick<MainFormReduxState, 'Variables'> & {
     //
@@ -12,7 +12,7 @@ type PropsType = Pick<MainFormReduxState, 'Variables'> & {
 const LetterFormItems: React.FC<PropsType> = props => {
     const { Variables } = props;
 
-    const [Text, setText] = usehighlightVariables(Object.keys(Variables ?? {}));
+    const VariablesKeys = useMemo(() => Object.keys(Variables ?? {}), [Variables]);
 
     return (
         <>
@@ -20,30 +20,40 @@ const LetterFormItems: React.FC<PropsType> = props => {
                 <label className="mainForm__formItem__label" htmlFor="letter_from">
                     From
                 </label>
-                <input className="mainForm__formItem__input" id="letter_from" type="text" />
+                <TextInputWithHightlight
+                    inputClassName="mainForm__formItem__input"
+                    inputProps={{ id: 'letter_from', name: 'letter_from' }}
+                    hightlightArray={VariablesKeys}
+                />
             </div>
             <div className="mainForm__formItem">
                 <label className="mainForm__formItem__label" htmlFor="letter_to">
                     To
                 </label>
-                <input className="mainForm__formItem__input" id="letter_to" type="text" />
+                <TextInputWithHightlight
+                    inputClassName="mainForm__formItem__input"
+                    inputProps={{ id: 'letter_to', name: 'letter_to' }}
+                    hightlightArray={VariablesKeys}
+                />
             </div>
             <div className="mainForm__formItem">
                 <label className="mainForm__formItem__label" htmlFor="letter_subject">
                     Subject
                 </label>
-                <input className="mainForm__formItem__input" id="letter_subject" type="text" />
+                <TextInputWithHightlight
+                    inputClassName="mainForm__formItem__input"
+                    inputProps={{ id: 'letter_subject', name: 'letter_subject' }}
+                    hightlightArray={VariablesKeys}
+                />
             </div>
             <div className="mainForm__formItem">
                 <label className="mainForm__formItem__label" htmlFor="letter_text">
                     Text
                 </label>
-                <ContentEditable
-                    className="mainForm__formItem__input mainForm__formItem__input--textarea"
-                    html={Text}
-                    role="textbox"
-                    aria-labelledby="letter_text"
-                    onChange={event => setText(event.target.value)}
+                <TextareaWithHightlight
+                    textareaClassName="mainForm__formItem__input mainForm__formItem__input--textarea"
+                    textareaProps={{ id: 'letter_text', name: 'letter_text' }}
+                    hightlightArray={VariablesKeys}
                 />
             </div>
         </>
