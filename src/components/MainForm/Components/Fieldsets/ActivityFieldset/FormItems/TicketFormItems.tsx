@@ -1,17 +1,13 @@
-import React, { useMemo } from 'react';
-
-import type { MainFormReduxState } from '../../../../MainFormTypes';
+import React from 'react';
 
 import TextInputWithHightlight from '../../../Inputs/TextInputWithHightlight';
 
-type PropsType = Pick<MainFormReduxState, 'Variables'> & {
-    //
+type PropsType = {
+    VariablesKeys: string[];
 };
 
 const TicketFormItems: React.FC<PropsType> = props => {
-    const { Variables } = props;
-
-    const VariablesKeys = useMemo(() => Object.keys(Variables ?? {}), [Variables]);
+    const { VariablesKeys } = props;
 
     return (
         <>

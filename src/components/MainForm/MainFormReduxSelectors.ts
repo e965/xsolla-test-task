@@ -7,3 +7,7 @@ export const getVariables = createSelector<RootStateType, MainFormReduxState['Va
     state => state.mainForm.Variables,
     Variables => Variables
 );
+
+export const getVariablesKeys = createSelector<RootStateType, MainFormReduxState['Variables'], string[]>(getVariables, Variables => {
+    return Object.keys(Variables ?? {});
+});

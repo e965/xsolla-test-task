@@ -3,12 +3,13 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { postDataThunk } from '../MainFormReduxSlice';
 
-import { getVariables } from '../MainFormReduxSelectors';
+import { getVariables, getVariablesKeys } from '../MainFormReduxSelectors';
 
 import MainForm from './MainForm';
 
 const MainFormContainer: React.FC = () => {
     const Variables = useSelector(getVariables);
+    const VariablesKeys = useSelector(getVariablesKeys);
 
     const dispatch = useDispatch();
 
@@ -16,7 +17,7 @@ const MainFormContainer: React.FC = () => {
         dispatch(postDataThunk({ dwh_link }));
     }, []);
 
-    return <MainForm {...{ Variables }} {...{ handleDataPost }} />;
+    return <MainForm {...{ Variables, VariablesKeys }} {...{ handleDataPost }} />;
 };
 
 export default MainFormContainer;

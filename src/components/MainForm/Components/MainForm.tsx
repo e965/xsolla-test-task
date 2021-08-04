@@ -10,11 +10,12 @@ import ActivityFieldset from './Fieldsets/ActivityFieldset/ActivityFieldset';
 import './MainForm.scss';
 
 type PropsType = Pick<MainFormReduxState, 'Variables'> & {
+    VariablesKeys: string[];
     handleDataPost: (dwhLink: string) => void;
 };
 
 const MainForm: React.FC<PropsType> = props => {
-    const { Variables } = props;
+    const { Variables, VariablesKeys } = props;
     const { handleDataPost } = props;
 
     const [SelectedActivityType, setSelectedActivityType] = useState<ActivityType>('none');
@@ -37,7 +38,7 @@ const MainForm: React.FC<PropsType> = props => {
 
             <hr className="mainForm__separator" />
 
-            <ActivityFieldset {...{ Variables }} {...{ SelectedActivityType, selectedActivityTypeChange }} />
+            <ActivityFieldset {...{ Variables, VariablesKeys }} {...{ SelectedActivityType, selectedActivityTypeChange }} />
 
             {SelectedActivityType !== 'none' ? (
                 <div className="mainForm__buttons">

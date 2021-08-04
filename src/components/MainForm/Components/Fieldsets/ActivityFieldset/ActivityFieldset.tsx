@@ -8,12 +8,13 @@ import ChatMessageFormItems from './FormItems/ChatMessageFormItems';
 import TicketFormItems from './FormItems/TicketFormItems';
 
 type PropsType = Pick<MainFormReduxState, 'Variables'> & {
+    VariablesKeys: string[];
     SelectedActivityType: ActivityType;
     selectedActivityTypeChange: (activityType: ActivityType) => void;
 };
 
 const DataFieldset: React.FC<PropsType> = props => {
-    const { Variables } = props;
+    const { Variables, VariablesKeys } = props;
     const { SelectedActivityType, selectedActivityTypeChange } = props;
 
     return (
@@ -37,9 +38,9 @@ const DataFieldset: React.FC<PropsType> = props => {
                     </select>
                 </div>
 
-                {SelectedActivityType === 'letter' ? <LetterFormItems {...{ Variables }} /> : null}
-                {SelectedActivityType === 'chat_message' ? <ChatMessageFormItems {...{ Variables }} /> : null}
-                {SelectedActivityType === 'ticket' ? <TicketFormItems {...{ Variables }} /> : null}
+                {SelectedActivityType === 'letter' ? <LetterFormItems {...{ VariablesKeys }} /> : null}
+                {SelectedActivityType === 'chat_message' ? <ChatMessageFormItems {...{ VariablesKeys }} /> : null}
+                {SelectedActivityType === 'ticket' ? <TicketFormItems {...{ VariablesKeys }} /> : null}
             </div>
             <section className="mainForm__fieldset__extra mainForm__variables">
                 {Variables ? (
