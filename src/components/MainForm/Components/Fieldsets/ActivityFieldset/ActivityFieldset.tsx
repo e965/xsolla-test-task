@@ -19,12 +19,13 @@ const DataFieldset: React.FC<PropsType> = props => {
             <div className="mainForm__fieldset__legend">Activity</div>
             <div className="mainForm__fieldset__inputs">
                 <div className="mainForm__formItem">
-                    <label className="mainForm__formItem__label" htmlFor="timezone">
+                    <label className="mainForm__formItem__label" htmlFor="activity_type">
                         Type
                     </label>
                     <select
                         className="mainForm__formItem__input"
-                        id="timezone"
+                        id="activity_type"
+                        name="activity_type"
                         value={SelectedType}
                         onChange={event => setSelectedType(event.currentTarget.value as typeof SelectedType)}>
                         <option disabled hidden value="none" />
