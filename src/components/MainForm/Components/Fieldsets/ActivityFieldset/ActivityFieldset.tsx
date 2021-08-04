@@ -4,6 +4,7 @@ import type { MainFormReduxState } from '../../../MainFormTypes';
 
 import LetterFormItems from './FormItems/LetterFormItems';
 import ChatMessageFormItems from './FormItems/ChatMessageFormItems';
+import TicketFormItems from './FormItems/TicketFormItems';
 
 type PropsType = Pick<MainFormReduxState, 'Variables'> & {
     //
@@ -37,6 +38,7 @@ const DataFieldset: React.FC<PropsType> = props => {
 
                 {SelectedType === 'letter' ? <LetterFormItems {...{ Variables }} /> : null}
                 {SelectedType === 'chat_message' ? <ChatMessageFormItems {...{ Variables }} /> : null}
+                {SelectedType === 'ticket' ? <TicketFormItems {...{ Variables }} /> : null}
             </div>
             <section className="mainForm__fieldset__extra mainForm__variables">
                 {Variables ? (
