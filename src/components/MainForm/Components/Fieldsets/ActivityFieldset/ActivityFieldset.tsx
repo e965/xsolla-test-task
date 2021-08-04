@@ -1,19 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import type { MainFormReduxState } from '../../../MainFormTypes';
+import type { ActivityType } from '../../../MainFormTypes';
 
 import LetterFormItems from './FormItems/LetterFormItems';
 import ChatMessageFormItems from './FormItems/ChatMessageFormItems';
 import TicketFormItems from './FormItems/TicketFormItems';
 
 type PropsType = Pick<MainFormReduxState, 'Variables'> & {
-    //
+    SelectedActivityType: ActivityType;
+    selectedActivityTypeChange: (activityType: ActivityType) => void;
 };
 
 const DataFieldset: React.FC<PropsType> = props => {
     const { Variables } = props;
-
-    const [SelectedType, setSelectedType] = useState<'letter' | 'chat_message' | 'ticket' | 'none'>('none');
+    const { SelectedActivityType, selectedActivityTypeChange } = props;
 
     return (
         <fieldset className="mainForm__fieldset">
@@ -27,8 +28,8 @@ const DataFieldset: React.FC<PropsType> = props => {
                         className="mainForm__formItem__input"
                         id="activity_type"
                         name="activity_type"
-                        value={SelectedType}
-                        onChange={event => setSelectedType(event.currentTarget.value as typeof SelectedType)}>
+                        value={SelectedActivityType}
+                        onChange={event => selectedActivityTypeChange(event.currentTarget.value as ActivityType)}>
                         <option disabled hidden value="none" />
                         <option value="letter">Letter</option>
                         <option value="chat_message">Chat Message</option>
@@ -36,9 +37,9 @@ const DataFieldset: React.FC<PropsType> = props => {
                     </select>
                 </div>
 
-                {SelectedType === 'letter' ? <LetterFormItems {...{ Variables }} /> : null}
-                {SelectedType === 'chat_message' ? <ChatMessageFormItems {...{ Variables }} /> : null}
-                {SelectedType === 'ticket' ? <TicketFormItems {...{ Variables }} /> : null}
+                {SelectedActivityType === 'letter' ? <LetterFormItems {...{ Variables }} /> : null}
+                {SelectedActivityType === 'chat_message' ? <ChatMessageFormItems {...{ Variables }} /> : null}
+                {SelectedActivityType === 'ticket' ? <TicketFormItems {...{ Variables }} /> : null}
             </div>
             <section className="mainForm__fieldset__extra mainForm__variables">
                 {Variables ? (
