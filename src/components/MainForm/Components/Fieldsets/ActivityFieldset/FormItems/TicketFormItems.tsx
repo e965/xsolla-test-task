@@ -17,7 +17,7 @@ const TicketFormItems: React.FC<PropsType> = props => {
                 </label>
                 <TextInputWithHightlight
                     inputClassName="mainForm__formItem__input"
-                    inputProps={{ id: 'letter_from', name: 'letter_from' }}
+                    inputProps={{ id: 'ticket_summary', name: 'ticket_summary' }}
                     hightlightArray={VariablesKeys}
                 />
             </div>
