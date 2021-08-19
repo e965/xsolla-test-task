@@ -28,13 +28,36 @@ const DataFieldset: React.FC<PropsType> = props => {
             const evt = document.createEvent('HTMLEvents');
             evt.initEvent('change', false, true);
 
+            const createNewValue = (value: string, cursorPosition: number, variableText: string) => {
+                const ValueBeforeCursor = value.substring(0, cursorPosition);
+                const ValueAfterCursor = value.substring(cursorPosition, value.length);
+
+                return ValueBeforeCursor + `{{ ${variableText} }}` + ValueAfterCursor;
+            };
+
+            const VariableLength = variableText.length + '{{  }}'.length;
+
             if (InputInFocus) {
-                InputInFocus.current.value += `{{ ${variableText} }}`;
+                const Input = InputInFocus.current;
+                const CursorPosition = Number(Input.selectionEnd);
+                const NeWCursorPosition = CursorPosition + VariableLength;
+
+                InputInFocus.current.focus();
+                InputInFocus.current.value = createNewValue(Input.value, CursorPosition, variableText);
+                InputInFocus.current.setSelectionRange(NeWCursorPosition, NeWCursorPosition);
+
                 InputInFocus.current.dispatchEvent(evt);
             }
 
             if (TextareaInFocus) {
-                TextareaInFocus.current.value += `{{ ${variableText} }}`;
+                const Input = TextareaInFocus.current;
+                const CursorPosition = Number(Input.selectionEnd);
+                const NeWCursorPosition = CursorPosition + VariableLength;
+
+                TextareaInFocus.current.focus();
+                TextareaInFocus.current.value = createNewValue(Input.value, CursorPosition, variableText);
+                TextareaInFocus.current.setSelectionRange(NeWCursorPosition, NeWCursorPosition);
+
                 TextareaInFocus.current.dispatchEvent(evt);
             }
         },
