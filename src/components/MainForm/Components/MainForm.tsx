@@ -22,8 +22,8 @@ const MainForm: React.FC<PropsType> = props => {
     const { handleDataPost } = props;
     const { handleFormEntriesSubmit } = props;
 
-    const [IsTriggerUnlocked, setIsTriggerUnlocked] = useState<boolean>(false);
-    const [IsActivityUnlocked, setIsActivityUnlocked] = useState<boolean>(false);
+    const [IsTriggerUnlocked, setIsTriggerUnlocked] = useState(false);
+    const [IsActivityUnlocked, setIsActivityUnlocked] = useState(false);
     const [SelectedActivityType, setSelectedActivityType] = useState<ActivityType>('none');
 
     const formSubmitHandler = useCallback(
@@ -42,6 +42,12 @@ const MainForm: React.FC<PropsType> = props => {
         [handleFormEntriesSubmit]
     );
 
+    const formResetHandler = useCallback(() => {
+        setIsTriggerUnlocked(false);
+        setIsActivityUnlocked(false);
+        setSelectedActivityType('none');
+    }, []);
+
     const selectedActivityTypeChange = useCallback((activityType: ActivityType) => {
         setSelectedActivityType(activityType);
     }, []);
@@ -55,7 +61,7 @@ const MainForm: React.FC<PropsType> = props => {
     }, []);
 
     return (
-        <form className="mainForm" onSubmit={formSubmitHandler}>
+        <form className="mainForm" onSubmit={formSubmitHandler} onReset={formResetHandler}>
             <DataFieldset {...{ handleDataPost }} {...{ handleDataFieldsSetted }} />
 
             <hr className="mainForm__separator" />
