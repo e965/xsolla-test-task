@@ -23,7 +23,7 @@ export const insertInstructionThunk = createAsyncThunk(
     async (args: { params: Parameters<typeof InsertAPI['insertInstruction']>[0]; formData: MainFormReduxState['SubmitedFormData'] }) => {
         const response = await InsertAPI.insertInstruction(args.params);
 
-        console.groupCollapsed('Запрос /insertInstruction');
+        console.groupCollapsed('Запрос /insert/instruction');
         console.log('params:', JSON.stringify(args.params));
         console.log('formData:', JSON.stringify(args.formData));
         console.log('resoinse:', JSON.stringify(response));
@@ -41,7 +41,7 @@ export const insertActivityThunk = createAsyncThunk(
     async (params: Parameters<typeof InsertAPI['insertActivity']>[0]) => {
         const response = await InsertAPI.insertActivity(params);
 
-        console.groupCollapsed('Запрос /insertActivity');
+        console.groupCollapsed('Запрос /insert/activity');
         console.log('params:', JSON.stringify(params));
         console.log('resoinse:', JSON.stringify(response));
         console.groupEnd();
@@ -53,7 +53,7 @@ export const insertActivityThunk = createAsyncThunk(
 export const insertTriggerThunk = createAsyncThunk(`${SliceName}/insertTrigger`, async (params: Parameters<typeof InsertAPI['insertTrigger']>[0]) => {
     const response = await InsertAPI.insertTrigger(params);
 
-    console.groupCollapsed('Запрос /insertTrigger');
+    console.groupCollapsed('Запрос /insert/trigger');
     console.log('params:', JSON.stringify(params));
     console.log('resoinse:', JSON.stringify(response));
     console.groupEnd();
