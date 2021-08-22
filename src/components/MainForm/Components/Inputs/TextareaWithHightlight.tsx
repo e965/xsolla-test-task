@@ -1,5 +1,8 @@
 import React, { useState, useCallback, useRef, useContext, useEffect } from 'react';
 
+import pushVariableToField from './logic/pushVariable';
+import highlightVariablesInField from './logic/highlightVariables';
+
 import { FieldInFocusContext } from '../FieldInFocusContext/FieldInFocusContext';
 
 type PropsType = {
@@ -18,7 +21,7 @@ const TextareaWithHightlight: React.FC<PropsType> = props => {
 
     const [HighlightsText, setHighlightsText] = useState('');
 
-    const [, , CurrentTextAreaInFocus, setCurrentTextAreaInFocus] = useContext(FieldInFocusContext);
+    const [InputInteractions, setInputInteractions] = useContext(FieldInFocusContext);
 
     const [IsThisFieldInFocus, setIsThisFieldInFocus] = useState<boolean>(false);
 
@@ -27,12 +30,12 @@ const TextareaWithHightlight: React.FC<PropsType> = props => {
     const HighlightsRef = useRef(document.createElement('div'));
 
     useEffect(() => {
-        setIsThisFieldInFocus(CurrentTextAreaInFocus?.current?.id === TextareaRef?.current?.id);
-    }, [CurrentTextAreaInFocus]);
+        setIsThisFieldInFocus(InputInteractions?.getCurrentID() === TextareaRef.current?.id);
+    }, [InputInteractions]);
 
     useEffect(() => {
         return () => {
-            setCurrentTextAreaInFocus(void 0);
+            setInputInteractions(void 0);
         };
     }, []);
 
@@ -50,15 +53,8 @@ const TextareaWithHightlight: React.FC<PropsType> = props => {
     }, [IsThisFieldInFocus]);
 
     const highlightValue = useCallback(
-        (value: string) => {
-            let newValue = value;
-
-            hightlightArray.forEach(hightlightText => {
-                newValue = newValue.replace(/\n$/g, '\n\n');
-                newValue = newValue.replaceAll(`{{ ${hightlightText} }}`, `<mark>{{ ${hightlightText} }}</mark>`);
-            });
-
-            setHighlightsText(newValue);
+        (currentValue: string) => {
+            return highlightVariablesInField(currentValue, hightlightArray, setHighlightsText);
         },
         [hightlightArray]
     );
@@ -87,9 +83,20 @@ const TextareaWithHightlight: React.FC<PropsType> = props => {
         (event: React.FocusEvent<HTMLTextAreaElement>) => {
             if (textareaOnFocus) textareaOnFocus(event);
 
-            setCurrentTextAreaInFocus(TextareaRef);
+            setInputInteractions({
+                getCurrentID: () => TextareaRef.current?.id,
+                pushVariable: variableText =>
+                    pushVariableToField(variableText, {
+                        setValue: (value: string) => (TextareaRef.current.value = value),
+                        getValue: () => TextareaRef.current.value,
+                        focus: () => TextareaRef.current.focus(),
+                        getCursorPosition: () => TextareaRef.current.selectionEnd,
+                        setCursorPosition: (position: number) => TextareaRef.current.setSelectionRange(position, position),
+                        dispatchEvent: (event: Event) => TextareaRef.current.dispatchEvent(event),
+                    }),
+            });
         },
-        [textareaOnFocus, setCurrentTextAreaInFocus]
+        [textareaOnFocus, setInputInteractions]
     );
 
     return (

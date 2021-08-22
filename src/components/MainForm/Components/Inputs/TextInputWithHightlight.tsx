@@ -1,5 +1,8 @@
 import React, { useState, useCallback, useRef, useContext, useEffect } from 'react';
 
+import pushVariableToField from './logic/pushVariable';
+import highlightVariablesInField from './logic/highlightVariables';
+
 import { FieldInFocusContext } from '../FieldInFocusContext/FieldInFocusContext';
 
 type PropsType = {
@@ -17,15 +20,21 @@ const TextInputWithHightlight: React.FC<PropsType> = props => {
 
     const [HighlightsText, setHighlightsText] = useState('');
 
-    const [CurrentInputInFocus, setCurrentInputInFocus] = useContext(FieldInFocusContext);
+    const [InputInteractions, setInputInteractions] = useContext(FieldInFocusContext);
 
     const [IsThisFieldInFocus, setIsThisFieldInFocus] = useState<boolean>(false);
 
     const InputRef = useRef(document.createElement('input'));
 
     useEffect(() => {
-        setIsThisFieldInFocus(CurrentInputInFocus?.current?.id === InputRef?.current?.id);
-    }, [CurrentInputInFocus]);
+        setIsThisFieldInFocus(InputInteractions?.getCurrentID() === InputRef.current?.id);
+    }, [InputInteractions]);
+
+    useEffect(() => {
+        return () => {
+            setInputInteractions(void 0);
+        };
+    }, []);
 
     useEffect(() => {
         const changeEvent = (event: Event) => {
@@ -41,15 +50,8 @@ const TextInputWithHightlight: React.FC<PropsType> = props => {
     }, [IsThisFieldInFocus]);
 
     const highlightValue = useCallback(
-        (value: string) => {
-            let newValue = value;
-
-            hightlightArray.forEach(hightlightText => {
-                newValue = newValue.replace(/\n$/g, '\n\n');
-                newValue = newValue.replaceAll(`{{ ${hightlightText} }}`, `<mark>{{ ${hightlightText} }}</mark>`);
-            });
-
-            setHighlightsText(newValue);
+        (currentValue: string) => {
+            return highlightVariablesInField(currentValue, hightlightArray, setHighlightsText);
         },
         [hightlightArray]
     );
@@ -67,9 +69,20 @@ const TextInputWithHightlight: React.FC<PropsType> = props => {
         (event: React.FocusEvent<HTMLInputElement>) => {
             if (inputOnFocus) inputOnFocus(event);
 
-            setCurrentInputInFocus(InputRef);
+            setInputInteractions({
+                getCurrentID: () => InputRef.current?.id,
+                pushVariable: variableText =>
+                    pushVariableToField(variableText, {
+                        setValue: (value: string) => (InputRef.current.value = value),
+                        getValue: () => InputRef.current.value,
+                        focus: () => InputRef.current.focus(),
+                        getCursorPosition: () => InputRef.current.selectionEnd ?? 0,
+                        setCursorPosition: (position: number) => InputRef.current.setSelectionRange(position, position),
+                        dispatchEvent: (event: Event) => InputRef.current.dispatchEvent(event),
+                    }),
+            });
         },
-        [inputOnFocus, setCurrentInputInFocus]
+        [inputOnFocus, setInputInteractions]
     );
 
     return (

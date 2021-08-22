@@ -21,52 +21,20 @@ const DataFieldset: React.FC<PropsType> = props => {
     const { IsActivityUnlocked } = props;
     const { SelectedActivityType, selectedActivityTypeChange } = props;
 
-    const [InputInFocus, , TextareaInFocus] = useContext(FieldInFocusContext);
+    const [InputInteractions] = useContext(FieldInFocusContext);
 
     const handleAddVariableToField = useCallback(
         (variableText: string) => {
-            const evt = document.createEvent('HTMLEvents');
-            evt.initEvent('change', false, true);
-
-            const createNewValue = (value: string, cursorPosition: number, variableText: string) => {
-                const ValueBeforeCursor = value.substring(0, cursorPosition);
-                const ValueAfterCursor = value.substring(cursorPosition, value.length);
-
-                return ValueBeforeCursor + `{{ ${variableText} }}` + ValueAfterCursor;
-            };
-
-            const VariableLength = variableText.length + '{{  }}'.length;
-
-            if (InputInFocus) {
-                const Input = InputInFocus.current;
-                const CursorPosition = Number(Input.selectionEnd);
-                const NeWCursorPosition = CursorPosition + VariableLength;
-
-                InputInFocus.current.focus();
-                InputInFocus.current.value = createNewValue(Input.value, CursorPosition, variableText);
-                InputInFocus.current.setSelectionRange(NeWCursorPosition, NeWCursorPosition);
-
-                InputInFocus.current.dispatchEvent(evt);
-            }
-
-            if (TextareaInFocus) {
-                const Input = TextareaInFocus.current;
-                const CursorPosition = Number(Input.selectionEnd);
-                const NeWCursorPosition = CursorPosition + VariableLength;
-
-                TextareaInFocus.current.focus();
-                TextareaInFocus.current.value = createNewValue(Input.value, CursorPosition, variableText);
-                TextareaInFocus.current.setSelectionRange(NeWCursorPosition, NeWCursorPosition);
-
-                TextareaInFocus.current.dispatchEvent(evt);
+            if (InputInteractions) {
+                InputInteractions.pushVariable(variableText);
             }
         },
-        [InputInFocus, TextareaInFocus]
+        [InputInteractions]
     );
 
     const IsAnyFieldInFocus = useMemo((): boolean => {
-        return !!InputInFocus || !!TextareaInFocus;
-    }, [InputInFocus, TextareaInFocus]);
+        return !!InputInteractions;
+    }, [InputInteractions]);
 
     return (
         <fieldset className="mainForm__fieldset">
