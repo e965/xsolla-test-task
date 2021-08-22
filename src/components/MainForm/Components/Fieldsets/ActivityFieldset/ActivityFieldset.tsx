@@ -23,8 +23,6 @@ const DataFieldset: React.FC<PropsType> = props => {
 
     const [InputInteractions] = useContext(FieldInFocusContext);
 
-    console.log(InputInteractions);
-
     const handleAddVariableToField = useCallback(
         (variableText: string) => {
             if (InputInteractions) {
