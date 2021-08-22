@@ -10,11 +10,6 @@ const TriggerFieldset: React.FC<PropsType> = props => {
     const { IsTriggerUnlocked } = props;
     const { handleTriggerFieldsSetted } = props;
 
-    const convertTZTimeToOffset = useCallback((stringNumber: typeof Timezones[0]['utc']) => {
-        const Times = stringNumber.split(':');
-        return (Number(Times[0]) * 60 + Number(Times[1])) * -1;
-    }, []);
-
     const handleCronExpressionChange = useCallback(() => {
         handleTriggerFieldsSetted();
     }, []);
@@ -44,7 +39,7 @@ const TriggerFieldset: React.FC<PropsType> = props => {
                     </label>
                     <select className="mainForm__formItem__input" id="timezone" name="timezone" disabled={!IsTriggerUnlocked} required>
                         {Timezones.map(timeZone => (
-                            <option key={timeZone.tzCode} value={convertTZTimeToOffset(timeZone.utc)}>
+                            <option key={timeZone.tzCode} value={timeZone.tzCode}>
                                 {timeZone.label}
                             </option>
                         ))}

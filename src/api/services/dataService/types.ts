@@ -1,5 +1,5 @@
 export type PostDataQueryParamsType = {
-    dwh_link: string;
+    source: string;
 };
 
 export type PostDataQueryResponseType = {

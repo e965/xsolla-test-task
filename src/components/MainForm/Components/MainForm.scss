@@ -77,14 +77,22 @@
 
             text-transform: uppercase;
 
+            transition: all 0.1s ease-in-out;
+
             cursor: pointer;
 
-            &:hover {
+            &:not([disabled]):hover {
                 opacity: 0.8;
             }
 
             &[type='submit'] {
                 background-color: #0073f7;
+                box-shadow: 0 4px 16px 0 rgb(0 115 247 / 32%);
+
+                &[disabled] {
+                    background-color: #c5d0db;
+                    box-shadow: none;
+                }
 
                 border: 0;
 

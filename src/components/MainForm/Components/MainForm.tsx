@@ -13,13 +13,14 @@ import './MainForm.scss';
 
 type PropsType = Pick<MainFormReduxState, 'Variables'> & {
     VariablesKeys: string[];
+    IsFormSubmitPending: boolean;
     handleDataPost: (dwhLink: string) => void;
     handleFormEntriesSubmit: (formEntries: MainFormEntriesType) => void;
     handleFormReset: () => void;
 };
 
 const MainForm: React.FC<PropsType> = props => {
-    const { Variables, VariablesKeys } = props;
+    const { Variables, VariablesKeys, IsFormSubmitPending } = props;
     const { handleDataPost } = props;
     const { handleFormEntriesSubmit, handleFormReset } = props;
 
@@ -83,10 +84,14 @@ const MainForm: React.FC<PropsType> = props => {
             {SelectedActivityType !== 'none' && IsActivityUnlocked ? (
                 <div className="mainForm__buttons">
                     <div>
-                        <button type="submit">Create</button>
+                        <button type="submit" disabled={IsFormSubmitPending}>
+                            Create
+                        </button>
                     </div>
                     <div>
-                        <button type="reset">Reset</button>
+                        <button type="reset" disabled={IsFormSubmitPending}>
+                            Reset
+                        </button>
                     </div>
                 </div>
             ) : null}

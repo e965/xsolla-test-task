@@ -18,23 +18,30 @@ export const postDataThunk = createAsyncThunk(`${SliceName}/postData`, async (pa
     return response;
 });
 
-export const createLetterThunk = createAsyncThunk(`${SliceName}/createLetter`, async (params: Parameters<typeof InsertAPI['createLetter']>[0]) => {
-    const response = await InsertAPI.createLetter(params);
+export const insertInstructionThunk = createAsyncThunk(
+    `${SliceName}/insertInstruction`,
+    async (args: { params: Parameters<typeof InsertAPI['insertInstruction']>[0]; formData: MainFormReduxState['SubmitedFormData'] }) => {
+        const response = await InsertAPI.insertInstruction(args.params);
 
-    console.groupCollapsed('Запрос /createLetter');
-    console.log('params:', JSON.stringify(params));
-    console.log('resoinse:', JSON.stringify(response));
-    console.groupEnd();
+        console.groupCollapsed('Запрос /insertInstruction');
+        console.log('params:', JSON.stringify(args.params));
+        console.log('formData:', JSON.stringify(args.formData));
+        console.log('resoinse:', JSON.stringify(response));
+        console.groupEnd();
 
-    return response;
-});
+        return {
+            response,
+            formData: args.formData,
+        };
+    }
+);
 
-export const createChatMessageThunk = createAsyncThunk(
-    `${SliceName}/createChatMessage`,
-    async (params: Parameters<typeof InsertAPI['createChatMessage']>[0]) => {
-        const response = await InsertAPI.createChatMessage(params);
+export const insertActivityThunk = createAsyncThunk(
+    `${SliceName}/insertActivity`,
+    async (params: Parameters<typeof InsertAPI['insertActivity']>[0]) => {
+        const response = await InsertAPI.insertActivity(params);
 
-        console.groupCollapsed('Запрос /createChatMessage');
+        console.groupCollapsed('Запрос /insertActivity');
         console.log('params:', JSON.stringify(params));
         console.log('resoinse:', JSON.stringify(response));
         console.groupEnd();
@@ -43,10 +50,10 @@ export const createChatMessageThunk = createAsyncThunk(
     }
 );
 
-export const createTicketThunk = createAsyncThunk(`${SliceName}/createTicket`, async (params: Parameters<typeof InsertAPI['createTicket']>[0]) => {
-    const response = await InsertAPI.createTicket(params);
+export const insertTriggerThunk = createAsyncThunk(`${SliceName}/insertTrigger`, async (params: Parameters<typeof InsertAPI['insertTrigger']>[0]) => {
+    const response = await InsertAPI.insertTrigger(params);
 
-    console.groupCollapsed('Запрос /createTicket');
+    console.groupCollapsed('Запрос /insertTrigger');
     console.log('params:', JSON.stringify(params));
     console.log('resoinse:', JSON.stringify(response));
     console.groupEnd();
@@ -56,7 +63,11 @@ export const createTicketThunk = createAsyncThunk(`${SliceName}/createTicket`, a
 
 const InitialState: MainFormReduxState = {
     Variables: null,
-    CreationPayload: null,
+    InstructionInsertPayload: null,
+    ActivityInsertPayload: null,
+    TriggerInsertPayload: null,
+    SubmitedFormData: null,
+    IsFormSubmitPending: false,
 };
 
 const MainFormReduxSlice = createSlice({
@@ -65,7 +76,18 @@ const MainFormReduxSlice = createSlice({
     reducers: {
         resetReduxState: (state, payload: PayloadAction<void>) => {
             state.Variables = null;
-            state.CreationPayload = null;
+            state.InstructionInsertPayload = null;
+            state.ActivityInsertPayload = null;
+            state.TriggerInsertPayload = null;
+            state.SubmitedFormData = null;
+            state.IsFormSubmitPending = false;
+        },
+        resetQueryPayloads: (state, payload: PayloadAction<void>) => {
+            state.InstructionInsertPayload = null;
+            state.ActivityInsertPayload = null;
+            state.TriggerInsertPayload = null;
+            state.SubmitedFormData = null;
+            state.IsFormSubmitPending = false;
         },
     },
     extraReducers: builder => {
@@ -73,32 +95,46 @@ const MainFormReduxSlice = createSlice({
             state.Variables = action.payload;
         });
 
-        builder.addCase(createLetterThunk.fulfilled, (state, action) => {
-            state.CreationPayload = {
-                type: 'letter',
-                id: action.payload.id,
-                timestamp: new Date().toDateString(),
+        builder.addCase(insertInstructionThunk.pending, (state, action) => {
+            state.IsFormSubmitPending = true;
+        });
+        builder.addCase(insertInstructionThunk.fulfilled, (state, action) => {
+            state.InstructionInsertPayload = {
+                ...action.payload.response,
+                timestamp: new Date().toISOString(),
             };
+            state.SubmitedFormData = action.payload.formData;
+        });
+        builder.addCase(insertInstructionThunk.rejected, (state, action) => {
+            state.IsFormSubmitPending = false;
+            console.warn(action.error);
         });
 
-        builder.addCase(createChatMessageThunk.fulfilled, (state, action) => {
-            state.CreationPayload = {
-                type: 'chat_message',
-                id: action.payload.id,
-                timestamp: new Date().toDateString(),
+        builder.addCase(insertActivityThunk.fulfilled, (state, action) => {
+            state.ActivityInsertPayload = {
+                ...action.payload,
+                timestamp: new Date().toISOString(),
             };
         });
+        builder.addCase(insertActivityThunk.rejected, (state, action) => {
+            state.IsFormSubmitPending = false;
+            console.warn(action.error);
+        });
 
-        builder.addCase(createTicketThunk.fulfilled, (state, action) => {
-            state.CreationPayload = {
-                type: 'ticket',
-                id: action.payload.id,
-                timestamp: new Date().toDateString(),
+        builder.addCase(insertTriggerThunk.fulfilled, (state, action) => {
+            state.IsFormSubmitPending = true;
+            state.TriggerInsertPayload = {
+                ...action.payload,
+                timestamp: new Date().toISOString(),
             };
+        });
+        builder.addCase(insertTriggerThunk.rejected, (state, action) => {
+            state.IsFormSubmitPending = false;
+            console.warn(action.error);
         });
     },
 });
 
-export const { resetReduxState } = MainFormReduxSlice.actions;
+export const { resetReduxState, resetQueryPayloads } = MainFormReduxSlice.actions;
 
 export default MainFormReduxSlice.reducer;

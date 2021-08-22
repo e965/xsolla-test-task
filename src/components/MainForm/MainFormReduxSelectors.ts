@@ -12,7 +12,43 @@ export const getVariablesKeys = createSelector<RootStateType, MainFormReduxState
     return Object.keys(Variables ?? {});
 });
 
-export const getCreationPayload = createSelector<RootStateType, MainFormReduxState['CreationPayload'], MainFormReduxState['CreationPayload']>(
-    state => state.mainForm.CreationPayload,
-    CreationPayload => CreationPayload
+export const getInstructionInsertPayload = createSelector<
+    RootStateType,
+    MainFormReduxState['InstructionInsertPayload'],
+    MainFormReduxState['InstructionInsertPayload']
+>(
+    state => state.mainForm.InstructionInsertPayload,
+    InstructionInsertPayload => InstructionInsertPayload
+);
+
+export const getActivityInsertPayload = createSelector<
+    RootStateType,
+    MainFormReduxState['ActivityInsertPayload'],
+    MainFormReduxState['ActivityInsertPayload']
+>(
+    state => state.mainForm.ActivityInsertPayload,
+    ActivityInsertPayload => ActivityInsertPayload
+);
+
+export const getTriggerInsertPayload = createSelector<
+    RootStateType,
+    MainFormReduxState['TriggerInsertPayload'],
+    MainFormReduxState['TriggerInsertPayload']
+>(
+    state => state.mainForm.TriggerInsertPayload,
+    TriggerInsertPayload => TriggerInsertPayload
+);
+
+export const getSubmitedFormData = createSelector<RootStateType, MainFormReduxState['SubmitedFormData'], MainFormReduxState['SubmitedFormData']>(
+    state => state.mainForm.SubmitedFormData,
+    SubmitedFormData => SubmitedFormData
+);
+
+export const getIsFormSubmitPending = createSelector<
+    RootStateType,
+    MainFormReduxState['IsFormSubmitPending'],
+    MainFormReduxState['IsFormSubmitPending']
+>(
+    state => state.mainForm.IsFormSubmitPending,
+    IsFormSubmitPending => IsFormSubmitPending
 );
