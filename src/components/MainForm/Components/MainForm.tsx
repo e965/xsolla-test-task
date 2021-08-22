@@ -15,12 +15,13 @@ type PropsType = Pick<MainFormReduxState, 'Variables'> & {
     VariablesKeys: string[];
     handleDataPost: (dwhLink: string) => void;
     handleFormEntriesSubmit: (formEntries: MainFormEntriesType) => void;
+    handleFormReset: () => void;
 };
 
 const MainForm: React.FC<PropsType> = props => {
     const { Variables, VariablesKeys } = props;
     const { handleDataPost } = props;
-    const { handleFormEntriesSubmit } = props;
+    const { handleFormEntriesSubmit, handleFormReset } = props;
 
     const [IsTriggerUnlocked, setIsTriggerUnlocked] = useState(false);
     const [IsActivityUnlocked, setIsActivityUnlocked] = useState(false);
@@ -46,7 +47,8 @@ const MainForm: React.FC<PropsType> = props => {
         setIsTriggerUnlocked(false);
         setIsActivityUnlocked(false);
         setSelectedActivityType('none');
-    }, []);
+        handleFormReset();
+    }, [handleFormReset]);
 
     const selectedActivityTypeChange = useCallback((activityType: ActivityType) => {
         setSelectedActivityType(activityType);

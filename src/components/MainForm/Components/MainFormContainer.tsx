@@ -6,6 +6,8 @@ import type { MainFormEntriesType } from '../MainFormTypes';
 import { postDataThunk } from '../MainFormReduxSlice';
 import { createLetterThunk, createChatMessageThunk, createTicketThunk } from '../MainFormReduxSlice';
 
+import { resetReduxState } from '../MainFormReduxSlice';
+
 import { getVariables, getVariablesKeys } from '../MainFormReduxSelectors';
 import { getCreationPayload } from '../MainFormReduxSelectors';
 
@@ -97,7 +99,11 @@ const MainFormContainer: React.FC = () => {
         [dispatch]
     );
 
-    return <MainForm {...{ Variables, VariablesKeys }} {...{ handleDataPost }} {...{ handleFormEntriesSubmit }} />;
+    const handleFormReset = useCallback(() => {
+        dispatch(resetReduxState());
+    }, [dispatch]);
+
+    return <MainForm {...{ Variables, VariablesKeys }} {...{ handleDataPost }} {...{ handleFormEntriesSubmit, handleFormReset }} />;
 };
 
 export default MainFormContainer;

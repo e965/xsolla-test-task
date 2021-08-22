@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
 
 import { DataAPI, InsertAPI } from '../../api/services';
 
@@ -61,7 +62,12 @@ const InitialState: MainFormReduxState = {
 const MainFormReduxSlice = createSlice({
     name: SliceName,
     initialState: InitialState,
-    reducers: {},
+    reducers: {
+        resetReduxState: (state, payload: PayloadAction<void>) => {
+            state.Variables = null;
+            state.CreationPayload = null;
+        },
+    },
     extraReducers: builder => {
         builder.addCase(postDataThunk.fulfilled, (state, action) => {
             state.Variables = action.payload;
@@ -92,5 +98,7 @@ const MainFormReduxSlice = createSlice({
         });
     },
 });
+
+export const { resetReduxState } = MainFormReduxSlice.actions;
 
 export default MainFormReduxSlice.reducer;
