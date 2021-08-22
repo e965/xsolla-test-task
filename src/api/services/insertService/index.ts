@@ -13,16 +13,7 @@ import type { CreateSomethingQueryResponseType } from './types';
 
 const responseCallback = (): InsertQueryResponseType => {
     return {
-        title: 'item_' + getRandomArbitrary(0, 1000),
-        type: 'string',
-        properties: {
-            id: {
-                title: 'item_' + getRandomArbitrary(0, 1000),
-                exclusiveMinimum: getRandomArbitrary(0, 1000),
-                type: 'string',
-            },
-        },
-        required: ['id'],
+        id: getRandomArbitrary(0, 1000),
     };
 };
 
