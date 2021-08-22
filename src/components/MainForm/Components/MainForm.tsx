@@ -3,7 +3,7 @@ import React, { useState, useCallback } from 'react';
 import type { MainFormReduxState } from '../MainFormTypes';
 import type { ActivityType, MainFormEntriesType } from '../MainFormTypes';
 
-import { FieldInFocusProvider } from './FieldInFocusContext/FieldInFocusContext';
+import FieldInFocusContextProvider from './FieldInFocusContext/FieldInFocusContextProvider';
 
 import DataFieldset from './Fieldsets/DataFieldset';
 import TriggerFieldset from './Fieldsets/TriggerFieldset';
@@ -70,13 +70,13 @@ const MainForm: React.FC<PropsType> = props => {
 
             <hr className="mainForm__separator" />
 
-            <FieldInFocusProvider>
+            <FieldInFocusContextProvider>
                 <ActivityFieldset
                     {...{ Variables, VariablesKeys }}
                     {...{ IsActivityUnlocked }}
                     {...{ SelectedActivityType, selectedActivityTypeChange }}
                 />
-            </FieldInFocusProvider>
+            </FieldInFocusContextProvider>
 
             {SelectedActivityType !== 'none' && IsActivityUnlocked ? (
                 <div className="mainForm__buttons">

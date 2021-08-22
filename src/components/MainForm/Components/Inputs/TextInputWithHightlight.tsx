@@ -3,7 +3,7 @@ import React, { useState, useCallback, useRef, useContext, useEffect } from 'rea
 import pushVariableToField from './logic/pushVariable';
 import highlightVariablesInField from './logic/highlightVariables';
 
-import { FieldInFocusContext } from '../FieldInFocusContext/FieldInFocusContext';
+import FieldInFocusContext from '../FieldInFocusContext/FieldInFocusContext';
 
 type PropsType = {
     inputProps: Omit<React.InputHTMLAttributes<HTMLInputElement>, 'className' | 'onChange'> & React.ClassAttributes<HTMLInputElement>;

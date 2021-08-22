@@ -3,7 +3,7 @@ import React, { useCallback, useContext, useMemo } from 'react';
 import type { MainFormReduxState } from '../../../MainFormTypes';
 import type { ActivityType } from '../../../MainFormTypes';
 
-import { FieldInFocusContext } from '../../FieldInFocusContext/FieldInFocusContext';
+import FieldInFocusContext from '../../FieldInFocusContext/FieldInFocusContext';
 
 import LetterFormItems from './FormItems/LetterFormItems';
 import ChatMessageFormItems from './FormItems/ChatMessageFormItems';
@@ -22,6 +22,8 @@ const DataFieldset: React.FC<PropsType> = props => {
     const { SelectedActivityType, selectedActivityTypeChange } = props;
 
     const [InputInteractions] = useContext(FieldInFocusContext);
+
+    console.log(InputInteractions);
 
     const handleAddVariableToField = useCallback(
         (variableText: string) => {

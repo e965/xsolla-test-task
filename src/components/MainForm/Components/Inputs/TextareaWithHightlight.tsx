@@ -3,7 +3,7 @@ import React, { useState, useCallback, useRef, useContext, useEffect } from 'rea
 import pushVariableToField from './logic/pushVariable';
 import highlightVariablesInField from './logic/highlightVariables';
 
-import { FieldInFocusContext } from '../FieldInFocusContext/FieldInFocusContext';
+import FieldInFocusContext from '../FieldInFocusContext/FieldInFocusContext';
 
 type PropsType = {
     textareaProps: Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, 'className' | 'onChange' | 'onScroll'>;
