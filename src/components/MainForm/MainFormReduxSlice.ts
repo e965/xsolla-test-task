@@ -12,7 +12,7 @@ export const postDataThunk = createAsyncThunk(`${SliceName}/postData`, async (pa
 
     console.groupCollapsed('Запрос /data');
     console.log('params:', JSON.stringify(params));
-    console.log('resoinse:', JSON.stringify(response));
+    console.log('response:', JSON.stringify(response));
     console.groupEnd();
 
     return response;
@@ -26,7 +26,7 @@ export const insertInstructionThunk = createAsyncThunk(
         console.groupCollapsed('Запрос /insert/instruction');
         console.log('params:', JSON.stringify(args.params));
         console.log('formData:', JSON.stringify(args.formData));
-        console.log('resoinse:', JSON.stringify(response));
+        console.log('response:', JSON.stringify(response));
         console.groupEnd();
 
         return {
@@ -43,7 +43,7 @@ export const insertActivityThunk = createAsyncThunk(
 
         console.groupCollapsed('Запрос /insert/activity');
         console.log('params:', JSON.stringify(params));
-        console.log('resoinse:', JSON.stringify(response));
+        console.log('response:', JSON.stringify(response));
         console.groupEnd();
 
         return response;
@@ -55,7 +55,7 @@ export const insertTriggerThunk = createAsyncThunk(`${SliceName}/insertTrigger`,
 
     console.groupCollapsed('Запрос /insert/trigger');
     console.log('params:', JSON.stringify(params));
-    console.log('resoinse:', JSON.stringify(response));
+    console.log('response:', JSON.stringify(response));
     console.groupEnd();
 
     return response;
